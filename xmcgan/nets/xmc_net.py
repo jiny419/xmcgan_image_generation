@@ -97,7 +97,7 @@ class Discriminator(nn.Module):
     x = self.activation_fn(x)
     x_pool = jnp.sum(x, axis=(1, 2))
     out = dense_fn(1)(x_pool)
-    embedding = dense_fn(self.df_dim * channel_dims[-1], use_bias=True)(cond)
+    embedding = dense_fn(self.df_dim * channel_dims[-1], use_bias=True)(cond) #self.df_dim = 96, channel_dims[-1] = 16 96*16=1536
     sent_cond = embedding
     tile_num = x_pool.shape[0] // embedding.shape[0]
     embedding = jnp.tile(embedding, (tile_num, 1))
