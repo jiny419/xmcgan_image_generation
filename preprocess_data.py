@@ -52,7 +52,7 @@ def get_bert_for_captions(captions: List[str], max_text_length: int = 17):
   input_mask = np.asarray(all_input_mask)
   segment_ids = np.zeros_like(ids)  # Single segment input.
 
-  _, embedding = _BERT_LAYER([ids, input_mask, segment_ids])
+  _, embedding = _BERT_LAYER([ids, input_mask, segment_ids]) # embedding dimension (b, 128, 768)
   max_len = np.sum(input_mask, axis=1)
   sent_embedding = tf.reduce_sum(embedding, axis=1) / max_len[:, None]
   return embedding, sent_embedding, max_len
